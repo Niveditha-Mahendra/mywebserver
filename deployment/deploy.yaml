@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Service
+metadata: 
+   name: mywebserver
+spec:
+   ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+   type: NodePort
+   selector:
+      app: mywebserver
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mywebserver
+  labels:
+    app: mywebserver
+spec:
+  replicas: 1
+  selector:
+        matchLabels:
+          app: mywebserver
+  template:
+    metadata:
+      name: mywebserver
+      labels:
+        app: mywebserver
+    spec:
+      containers:
+        - name: mywebserver
+          image: nivedithamahendra/mywebserver:latest
+          imagePullPolicy: "Always"
+          ports:
+           - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 30
+            failureThreshold: 5
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 150
