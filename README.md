@@ -3,7 +3,7 @@
 
 **Info:** 
 
-myWebserver service is dockerized and can be downloaded by docker image tag : **nivedithamahendra/mywebserver:latest **
+myWebserver service is dockerized and can be downloaded by docker image tag : nivedithamahendra/mywebserver:latest 
 
 Currently image tag is hardcoded in kubernetes deployment manifest file 
 
